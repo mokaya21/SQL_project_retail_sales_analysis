@@ -20,7 +20,6 @@ CREATE TABLE retail_sales
 			);
 
 SELECT COUNT(*) FROM retail_sales;
-DESCRIBE sql_project_sp1.retail_sales;
 
 -- Data cleaning
 
@@ -28,7 +27,7 @@ DESCRIBE sql_project_sp1.retail_sales;
 SELECT *
 FROM retail_sales
 WHERE 
-	transactions_id IS NULL
+    transactions_id IS NULL
     OR sale_date IS NULL
     OR sale_time IS NULL
     OR customer_id IS NULL 
@@ -65,12 +64,12 @@ WHERE sale_date = '2022-11-05';
 SELECT *
 FROM retail_sales
 WHERE category = 'Clothing'  
-		AND sale_date BETWEEN '2022-11-01' AND '2022-11-30'
+	AND sale_date BETWEEN '2022-11-01' AND '2022-11-30'
         AND quantity >= 4 ;
 
 -- Q3. Write a SQL query to calculate the total sales for each category
 SELECT 
-	category,
+    category,
     SUM(total_sale) AS total_sales, 
     COUNT(*) AS total_orders
 FROM retail_sales
@@ -101,26 +100,26 @@ ORDER BY category ;
 -- Q7. Write a SQL query to calculate the average sale for each month. Find out the best selling month in each year
 WITH aggregated_sales AS
 	(
-    SELECT 
+    	SELECT 
 		YEAR(sale_date) AS year,
 		MONTH(sale_date) AS month,
 		ROUND(AVG(total_sale), 2) AS avg_sales
 	FROM retail_sales
 	GROUP BY year, month
-    ) 
+      ) 
 SELECT *
 FROM (
-		SELECT
-			year,
+	SELECT
+	    year,
             month,
             avg_sales,
             RANK() OVER (PARTITION BY year ORDER BY avg_sales DESC) AS avg_sales_rank
-		FROM aggregated_sales) AS ranked_sales
+	FROM aggregated_sales) AS ranked_sales
 WHERE avg_sales_rank = 1;
 
 -- Q8. Write a SQL query to find the top 5 customers based on the highest total sales
 SELECT 
-	 customer_id,
+    customer_id,
     SUM(total_sale) AS total_sales
 FROM retail_sales
 GROUP BY customer_id
@@ -129,14 +128,14 @@ LIMIT 5;
 
 -- Q9. Write a SQL query to find the number of unique customers who purchased items from each category
 SELECT 
-	category,
+    category,
     COUNT(DISTINCT customer_id) AS unique_customers
 FROM retail_sales
 GROUP BY category;
 
 -- Q10. Write a SQL query to create each shift and number of orders (e.g. Morning <= 12, Afternoon between 12 & 17, Evening > 17
 SELECT 
-	CASE
+    CASE
     WHEN hour(sale_time) < 12 THEN 'Morning'
     WHEN hour(sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
     ELSE 'Evening'
