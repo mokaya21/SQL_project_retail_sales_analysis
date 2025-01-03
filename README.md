@@ -135,10 +135,10 @@ ORDER BY category ;
 ```sql
 WITH aggregated_sales AS
 	(
-    SELECT 
-		YEAR(sale_date) AS year,
-		MONTH(sale_date) AS month,
-		ROUND(AVG(total_sale), 2) AS avg_sales
+   	 SELECT 
+	     YEAR(sale_date) AS year,
+	     MONTH(sale_date) AS month,
+	     ROUND(AVG(total_sale), 2) AS avg_sales
 	FROM retail_sales
 	GROUP BY year, month
       ) 
@@ -215,6 +215,8 @@ This project provides hands-on experience in SQL, covering database setup, data 
 ## Author - Simon Peter Mokaya
 
 If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
+
 email: mokayasimon495@gmail.com
+
 linkedin: www.linkedin.com/in/simon-mokaya
 
