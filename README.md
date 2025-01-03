@@ -89,7 +89,7 @@ WHERE sale_date = '2022-11-05';
 SELECT *
 FROM retail_sales
 WHERE category = 'Clothing'  
-	AND sale_date BETWEEN '2022-11-01' AND '2022-11-30'
+    AND sale_date BETWEEN '2022-11-01' AND '2022-11-30'
     AND quantity >= 4 ;
 ```
 
