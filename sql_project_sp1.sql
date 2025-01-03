@@ -9,9 +9,9 @@ CREATE TABLE retail_sales
 				transactions_id	INT PRIMARY KEY,
 				sale_date DATE DEFAULT NULL,	
 				sale_time TIME DEFAULT NULL,
-				customer_id	INT DEFAULT NULL,
+				customer_id INT DEFAULT NULL,
 				gender VARCHAR(15) DEFAULT NULL,
-				age	INT DEFAULT NULL,
+				age INT DEFAULT NULL,
 				category VARCHAR(15) DEFAULT NULL,
 				quantity INT DEFAULT NULL,
 				price_per_unit FLOAT DEFAULT NULL,
@@ -19,7 +19,9 @@ CREATE TABLE retail_sales
 				total_sale FLOAT DEFAULT NULL
 			);
 
-SELECT COUNT(*) FROM retail_sales;
+-- Check whether the dataset has been imported correctly
+SELECT COUNT(*) 
+FROM retail_sales;
 
 -- Data cleaning
 
@@ -46,7 +48,7 @@ SELECT COUNT(*) AS total_sales
 FROM retail_sales;
 
 -- How many unique customers do we have?
-SELECT COUNT(DISTINCT customer_id) AS total_sales
+SELECT COUNT(DISTINCT customer_id) AS total_customers
 FROM retail_sales;
 
 -- How many categories do we have?
@@ -143,5 +145,13 @@ SELECT
     COUNT(transactions_id) AS number_of_orders    
 FROM retail_sales
 GROUP BY time_of_day;
+
+-- Q11. Write a SQL query to show the number of sales made in each month
+SELECT 
+    DATE_FORMAT(sale_date, '%Y-%m') AS sale_month, 
+    COUNT(*) AS sales_count
+FROM retail_sales
+GROUP BY sale_month
+ORDER BY sale_month;
 
 -- END OF PROJECT
